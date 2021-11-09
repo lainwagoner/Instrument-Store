@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instrument Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Instrument Store</h1>
+<div id="app">
+    <button class="new" v-on:click="newInstrument" v-on:click="showForm=true">Add New Instrument</button>
+    <h1 v-if="empty">Store is Empty</h1>
+    <button v-on:click="emptyCart" class="cart"> Empty Cart:{{cart.length}}</button>
+
+
+
+ <div v-if="showForm" class="form">
+    <div class="add">
+        <input v-model="newName" type="text"  placeholder="Instrument Name">
+
+        <h4>Brand</h4>
+        <input type="radio" id="first" value="Yamaha" v-model="newBrand">
+                   <label for="first">Yamaha</label>
+        <input type="radio" id="second" value="Fender" v-model="newBrand">
+            <label for="second">Fender</label>
+        <input type="radio" id="third" value="Maton" v-model="newBrand">
+            <label for="third">Maton</label>
+        <h4>Type</h4>
+        <input v-model="newType" type="text"  placeholder="Instrument Type">
+        <input v-model="newPrice" type="text"  placeholder="Instrument Price">
+        <button class="button" v-on:click="newInstrument">Add Instrument</button>
+
+    </div>
+ </div>
+
+
+    <div v-if="showPopUp" v-on:click="showPopUp=false">
+
+        <div class="popping">
+
+
+            <div>{{popUpItem.name}}</div>
+            <div>{{popUpItem.price}}</div>
+            <div>{{popUpItem.brand}}</div>
+            <div>{{popUpItem.type}}</div>
+
+
+        </div>
+    </div>
+
+<div class="instruments" v-for="(instrument,index) in instruments">
+    <div class="instrument" v-on:click="popUp(instrument)" v-bind:class="instrument.brand" >
+        <div v-if="instrument.noImg"><img v-bind:src="noImg"></div>
+        <div v-if="instrument.img"><img v-bind:src="instrument.img"></div>
+    <div>{{instrument.name}}</div>
+    <div>{{instrument.type}}</div>
+</div>
+    <br>
+    <button class="button" v-on:click="addCart(instrument,index)">Add To Cart</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<script src="app.js"></script>
+</html>
